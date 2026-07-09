@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "promptkit"
+version = "0.1.0"
+description = "Lightweight Python library for reliable LLM prompt templating, validation, and guardrails."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "monoshort", email = "contact@example.com"},
+]
+keywords = [
+    "llm", "prompt", "prompt-engineering", "ai", "guardrails", "templating",
+    "claude", "anthropic", "openai", "llm-safety", "structured-prompts"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/monoshort/promptkit"
+Repository = "https://github.com/monoshort/promptkit"
+Issues = "https://github.com/monoshort/promptkit/issues"
+Changelog = "https://github.com/monoshort/promptkit/blob/main/CHANGELOG.md"
+
+[project.scripts]
+promptkit = "promptkit.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/promptkit"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --cov=promptkit"
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_return_any = true
