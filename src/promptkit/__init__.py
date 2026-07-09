@@ -1,6 +1,11 @@
 """promptkit - Reliable LLM prompt engineering toolkit."""
 
-from .prompt import PromptTemplate, PromptValidationError, GuardrailViolation
+from .prompt import (
+    PromptTemplate,
+    PromptValidationError,
+    GuardrailViolation,
+    Guardrails,
+)
 
 from . import cli  # noqa: F401
 
@@ -9,4 +14,5 @@ __all__ = [
     "PromptTemplate",
     "PromptValidationError",
     "GuardrailViolation",
+    "Guardrails",
 ]
