@@ -1,6 +1,6 @@
 import pytest
 
-from promptkit import PromptTemplate, PromptValidationError, GuardrailViolation
+from promptkit import PromptTemplate, PromptValidationError, GuardrailViolation, Guardrails
 
 
 def test_basic_render():
@@ -27,9 +27,8 @@ def test_pii_blocked():
 
 
 def test_length_guard():
-    gr = type("G", (), {"max_length": 10, "max_var_length": None, "forbidden_patterns": [], "require_vars": True, "block_prompt_injection": True, "pii_patterns": []})()
-    # Note: we use real Guardrails in real usage
-    tmpl = PromptTemplate("{{x}}", guardrails=type("G", (), {"max_length": 5, "_compiled_forbidden": [], "_compiled_pii": [], "max_var_length": 100, "block_prompt_injection": False, "forbidden_patterns": [], "pii_patterns": []})())
+    gr = Guardrails(max_length=5, block_prompt_injection=False)
+    tmpl = PromptTemplate("{{x}}", guardrails=gr)
     with pytest.raises(GuardrailViolation):
         tmpl.render(x="1234567890")
 
